@@ -463,7 +463,9 @@ class DataSet implements Iterator // @TODO implement Countable, ArrayAccess
 			// want from the database, so we wrap the original query with a
 			// limit query.
 			// $sql = "select * from (" . $this->_sql . ") page limit $start,$pagesize";
-			$sql = $this->_sql . ($pagesize == 0 ? "" : " limit $start,$pagesize");
+
+            $sql = $this->_sql . ($pagesize == 0 ? "" : " offset $start limit $pagesize");
+			//$sql = $this->_sql . ($pagesize == 0 ? "" : " limit $start,$pagesize");
 			$this->_rs = $this->_phreezer->DataAdapter->Select($sql);
 
 	        // if we know the number of rows we have, then use SplFixedArray for performance
